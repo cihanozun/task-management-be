@@ -1,4 +1,10 @@
 package com.taskmanager.Task_Manager.services.admin;
 
+import com.taskmanager.Task_Manager.dto.UserDto;
+
+import java.util.List;
+
 public interface AdminService {
+
+    List<UserDto> getUsers();
 }
