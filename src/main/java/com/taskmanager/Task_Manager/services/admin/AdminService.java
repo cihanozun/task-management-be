@@ -1,5 +1,6 @@
 package com.taskmanager.Task_Manager.services.admin;
 
+import com.taskmanager.Task_Manager.dto.CommentDTO;
 import com.taskmanager.Task_Manager.dto.TaskDTO;
 import com.taskmanager.Task_Manager.dto.UserDto;
 
@@ -20,4 +21,8 @@ public interface AdminService {
     TaskDTO updateTask(Long id,TaskDTO taskDTO);
 
     List<TaskDTO> searchTaskByTitle(String title);
+
+    CommentDTO createComment(Long taskId, String content);
+
+    List<CommentDTO> getCommentsByTaskId(Long taskId);
 }
