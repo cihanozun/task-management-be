@@ -9,8 +9,10 @@ import com.taskmanager.Task_Manager.enums.UserRole;
 import com.taskmanager.Task_Manager.repositories.TaskRepository;
 import com.taskmanager.Task_Manager.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -43,5 +45,19 @@ public class AdminServiceImpl implements AdminService{
             return taskRepository.save(task).getTaskDTO();
         }
         return null;
+    }
+
+    @Override
+    public List<TaskDTO> getAllTasks() {
+        return taskRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing((Task::getDueDate)).reversed())
+                .map(Task::getTaskDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteTask(Long id) {
+        taskRepository.deleteById(id);
     }
 }

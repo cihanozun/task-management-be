@@ -19,6 +19,8 @@ public class AdminController {
     public ResponseEntity<?> getUsers(){
         return ResponseEntity.ok(adminService.getUsers());
     }
+
+
     @PostMapping("/task")
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO){
        TaskDTO createdTaskDTO = adminService.createTask(taskDTO);
@@ -26,5 +28,16 @@ public class AdminController {
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
        }
        return ResponseEntity.status(HttpStatus.CREATED).body(createdTaskDTO);
+    }
+
+    @GetMapping("/tasks")
+    public ResponseEntity<?> getAllTasks(){
+        return ResponseEntity.ok(adminService.getAllTasks());
+    }
+
+    @DeleteMapping("/task/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id){
+        adminService.deleteTask(id);
+        return ResponseEntity.ok(null);
     }
 }
